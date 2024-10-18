@@ -7,7 +7,7 @@ Advertisers would sponsor llama coins, and then llama users could earn a small a
 3. If the advertising cycle ends and the sponsorship fees have not been fully claimed by users, the remaining amount will be refunded to the sponsor.
 4. If the sponsorship fees have already been fully claimed, any remaining users who attempt to claim will not receive tokens. (But if the advertisement you place is attractive enough, I believe people will be willing to come and view it.)
 5. The number of Llama Media Worker NPC is limited. If there is no free Llama Media Worker NPC, please sponsor next time.
-6. Claim is only for the user who is vouched.
+6. Claim is available only for the user who is vouched.
 
 
 ### Llama Media NPC
