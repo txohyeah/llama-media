@@ -15,8 +15,8 @@ Submit to sponsor
 - Llama coins to sponsor : Such as, 100
 - Advertising period(day) : 1 ~ 7 
 - Advertisement content : maxLength 5000 charactors
-- Maximum amount for claim : Such as, 1
-- Minimum amount for claim : Such as, 5
+- Minimum amount for claim : Such as, 1
+- Maximum amount for claim : Such as, 5
 - Sponsor name : Such as, Llama king
 
 ![image](https://github.com/user-attachments/assets/27acf91b-df39-45e3-9524-b3bebdfb2340)
