@@ -114,14 +114,14 @@ function SponsorLlamaCoinsSchemaTags()
                     "minimum": 1,
                     "maximum": 100,
                     "$comment": "]] .. OneLlamaCoin .. [[",
-                    "title": "Maximum amount for claim"
+                    "title": "Minimum amount for claim"
                 },
                 "X-Max-Claim": {
                     "type": "number",
                     "minimum": 1,
                     "maximum": 100,
                     "$comment": "]] .. OneLlamaCoin .. [[",
-                    "title": "Minimum amount for claim"
+                    "title": "Maximum amount for claim"
                 },
                 "X-Sponsor-Name": {
                     "type": "string",

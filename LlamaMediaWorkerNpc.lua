@@ -252,6 +252,10 @@ Handlers.add(
     WorkStatus = "working"
     WorkRound = WorkRound + 1
 
+    if SponsorName == nil or SponsorName == "" then
+        SponsorName = "someone"
+    end
+
     local quantityStr =  tostring(math.floor(Quantity / OneCoin))
     NpcDisplayName = "Claim to share " .. quantityStr .. " " .. TokenName
 
