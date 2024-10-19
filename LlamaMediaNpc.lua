@@ -1,8 +1,8 @@
 -- llama land
--- TARGET_WORLD_PID = TARGET_WORLD_PID or "9a_YP6M7iN7b6QUoSvpoV3oe3CqxosyuJnraCucy5ss"
+TARGET_WORLD_PID = TARGET_WORLD_PID or "9a_YP6M7iN7b6QUoSvpoV3oe3CqxosyuJnraCucy5ss"
 
 -- test world
-TARGET_WORLD_PID = TARGET_WORLD_PID or "otsJFxhaG-HA0H1NEbIziyha8rNAdS8SxbGbGpni2rk"
+-- TARGET_WORLD_PID = TARGET_WORLD_PID or "otsJFxhaG-HA0H1NEbIziyha8rNAdS8SxbGbGpni2rk"
 
 LlamaMediaProcessId = LlamaMediaProcessId or "taXo_TeXsRKwNr6WDS3qV63fNu6HKGr919MSV5-F9c4"
 
@@ -51,7 +51,8 @@ function Register()
         },
         Data = json.encode({
             Type = "Avatar",
-            Position = { 42, 47 },
+            -- Position = { 42, 47 },
+            Position = { 5, -5 },
             Metadata = {
                 DisplayName = "Llama Media",
                 SkinNumber = 1,
@@ -113,14 +114,14 @@ function SponsorLlamaCoinsSchemaTags()
                     "minimum": 1,
                     "maximum": 100,
                     "$comment": "]] .. OneLlamaCoin .. [[",
-                    "title": "Maximum amount for 1 click"
+                    "title": "Maximum amount for claim"
                 },
                 "X-Max-Claim": {
                     "type": "number",
                     "minimum": 1,
                     "maximum": 100,
                     "$comment": "]] .. OneLlamaCoin .. [[",
-                    "title": "Maximum amount for 1 click"
+                    "title": "Minimum amount for claim"
                 },
                 "X-Sponsor-Name": {
                     "type": "string",

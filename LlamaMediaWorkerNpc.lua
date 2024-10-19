@@ -1,8 +1,8 @@
 -- llama land
--- TARGET_WORLD_PID = TARGET_WORLD_PID or "9a_YP6M7iN7b6QUoSvpoV3oe3CqxosyuJnraCucy5ss"
+TARGET_WORLD_PID = TARGET_WORLD_PID or "9a_YP6M7iN7b6QUoSvpoV3oe3CqxosyuJnraCucy5ss"
 
 -- test world
-TARGET_WORLD_PID = TARGET_WORLD_PID or "otsJFxhaG-HA0H1NEbIziyha8rNAdS8SxbGbGpni2rk"
+-- TARGET_WORLD_PID = TARGET_WORLD_PID or "otsJFxhaG-HA0H1NEbIziyha8rNAdS8SxbGbGpni2rk"
 
 LlamaMediaProcessId = LlamaMediaProcessId or "taXo_TeXsRKwNr6WDS3qV63fNu6HKGr919MSV5-F9c4"
 
@@ -24,6 +24,12 @@ Quantity = Quantity or 0
 ClaimQuantity = ClaimQuantity or 0
 WorkStatus = WorkStatus or "idle"
 WorkRound = WorkRound or 0
+
+Position = Position or { 0, 0 }
+PositionRandomX1 = PositionRandomX1 or -2
+PositionRandomX2 = PositionRandomX2 or 2
+PositionRandomY1 = PositionRandomY1 or -2
+PositionRandomY2 = PositionRandomY2 or 2
 
 -- npc variable end
 
@@ -113,7 +119,7 @@ function Register()
       },
       Data = json.encode({
         Type = "Avatar",
-        Position = { 45, 50 },
+        Position = Position,
         Metadata = {
           DisplayName = NpcDisplayName,
           SkinNumber = 8,
@@ -134,8 +140,8 @@ function Move()
     -- local y = math.random(12, 15)
   
     -- test world location
-    local x = math.random(45, 50)
-    local y = math.random(45, 50)
+    local x = math.random(PositionRandomX1, PositionRandomX2)
+    local y = math.random(PositionRandomY1, PositionRandomY2)
     
     ao.send({
       Target = TARGET_WORLD_PID,
