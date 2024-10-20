@@ -193,6 +193,7 @@ Handlers.add(
         local created_at = msg.Timestamp
         local ended_at = created_at + period * 24 * 3600 * 1000
         local end_flag = 0
+        local sponsor_content = string.gsub(msg.Tags["X-Content"], "'", " ")
 
         local sql = string.format([[
             INSERT INTO sponsor_record (
@@ -211,7 +212,7 @@ Handlers.add(
         msg.Tags['Sender'], 
         msg.Tags["X-Sponsor-Name"], 
         freeWorker, 
-        msg.Tags["X-Content"],
+        sponsor_content,
         tonumber(msg.Quantity), 
         msg.Tags["X-Period"], 
         tonumber(msg.Tags["X-Min-Claim"]), 
