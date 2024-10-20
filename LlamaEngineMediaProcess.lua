@@ -195,33 +195,76 @@ Handlers.add(
         local end_flag = 0
         local sponsor_content = string.gsub(msg.Tags["X-Content"], "'", " ")
 
-        local sql = string.format([[
+        -- local sql = string.format([[
+        --     INSERT INTO sponsor_record (
+        --     sponsor_address, 
+        --     sponsor_name, 
+        --     media_worker_address, 
+        --     content,
+        --     quantity, 
+        --     period, 
+        --     min_claim, 
+        --     max_claim, 
+        --     created_at, 
+        --     ended_at, 
+        --     end_flag) VALUES ('%s', '%s', '%s', '%s', %d, %d, %d, %d, %d, %d, %d)
+        -- ]], 
+        -- msg.Tags['Sender'], 
+        -- msg.Tags["X-Sponsor-Name"], 
+        -- freeWorker, 
+        -- sponsor_content,
+        -- tonumber(msg.Quantity), 
+        -- msg.Tags["X-Period"], 
+        -- tonumber(msg.Tags["X-Min-Claim"]), 
+        -- tonumber(msg.Tags["X-Max-Claim"]), 
+        -- created_at, 
+        -- ended_at, 
+        -- end_flag)
+        
+        -- DbAdmin:execSql(sql)
+
+        -- 定义SQL语句模板，使用问号作为占位符
+        local stmt = [[
             INSERT INTO sponsor_record (
-            sponsor_address, 
-            sponsor_name, 
-            media_worker_address, 
-            content,
-            quantity, 
-            period, 
-            min_claim, 
-            max_claim, 
+                sponsor_address, 
+                sponsor_name, 
+                media_worker_address, 
+                content,
+                quantity, 
+                period, 
+                min_claim, 
+                max_claim, 
+                created_at, 
+                ended_at, 
+                end_flag
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ]]
+
+        -- 准备参数列表
+        local params = {
+            msg.Tags['Sender'], 
+            msg.Tags["X-Sponsor-Name"], 
+            freeWorker, 
+            sponsor_content,
+            tonumber(msg.Quantity), 
+            tonumber(msg.Tags["X-Period"]), 
+            tonumber(msg.Tags["X-Min-Claim"]), 
+            tonumber(msg.Tags["X-Max-Claim"]), 
             created_at, 
             ended_at, 
-            end_flag) VALUES ('%s', '%s', '%s', '%s', %d, %d, %d, %d, %d, %d, %d)
-        ]], 
-        msg.Tags['Sender'], 
-        msg.Tags["X-Sponsor-Name"], 
-        freeWorker, 
-        sponsor_content,
-        tonumber(msg.Quantity), 
-        msg.Tags["X-Period"], 
-        tonumber(msg.Tags["X-Min-Claim"]), 
-        tonumber(msg.Tags["X-Max-Claim"]), 
-        created_at, 
-        ended_at, 
-        end_flag)
-        
-        DbAdmin:execSql(sql)
+            end_flag
+        }
+
+        -- 执行带有参数的SQL语句
+        local res, err = dbAdmin:insert(stmt, params)
+
+        -- 检查执行结果
+        if not res then
+            print("Error executing SQL: " .. tostring(err))
+        else
+            print("Record inserted successfully")
+        end
+
 
         -- 激活 Media Worker, 并把赞助费给 Media Worker
         ao.send({
