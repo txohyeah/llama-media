@@ -111,6 +111,18 @@ function ChatToWorld(data)
     })
 end
 
+function ChatToPrivate(data, recipient)
+    ao.send({
+      Target = TARGET_WORLD_PID,
+      Tags = {
+        Action = 'ChatMessage',
+        ['Author-Name'] = "Llama Media Worker",
+        Recipient = recipient,
+      },
+      Data = data
+    })
+end
+
 function Register()
     ao.send({
       Target = TARGET_WORLD_PID,
@@ -325,7 +337,7 @@ Handlers.add(
         if HasClaimed(msg.From) then
             local chatMsg = formatPid(msg.From) .. ", You have claimed already."
             print(msg.From .. " duplicate claim.")
-            ChatToWorld(chatMsg)
+            ChatToPrivate(chatMsg, msg.From)
             return
         end
 
@@ -334,7 +346,7 @@ Handlers.add(
         if vouchScore < 2 then
             local chatMsg = formatPid(msg.From) .. " don't have enough vouch point to claim. Please visit https://vouch-portal.arweave.net/ to improve your score."
             print(chatMsg)
-            ChatToWorld(chatMsg)
+            ChatToPrivate(chatMsg, msg.From)
             return
         end
 
@@ -386,12 +398,12 @@ Handlers.add(
             -- 发送 claim 成功消息
             local chatMsg = formatPid(msg.From) .. ", You have claimed " .. tostring(math.floor(claimNumber / OneCoin)) .. " " .. TokenName .. " coins which sponsored by " .. SponsorName .. "."
             print(msg.From .. " claim successfully.")
-            ChatToWorld(chatMsg)
+            ChatToPrivate(chatMsg, msg.From)
         else
             -- 没有多余的币了，只能干看广告
             local chatMsg = formatPid(msg.From) .. ", all coins have been claimed. Please wait for the next sponsor."
             print(msg.From .. ", all coins have been claimed.")
-            ChatToWorld(chatMsg)
+            ChatToPrivate(chatMsg, msg.From)
         end
  
     end
@@ -407,7 +419,7 @@ Handlers.add(
     end
   end,
   function(msg)
-    ChatToWorld("This activity which sponsored by " .. SponsorName .. " is over. I will be back next time.")
+    ChatToPrivate("This activity which sponsored by " .. SponsorName .. " is over. I will be back next time.", msg.From)
 
     DbAdmin:execSql("DELETE FROM claim_record")
 
